@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felicitări de Anul Nou - Kamelia.md</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>La mulți ani 2025!</h1>
+            <p>Vă dorim un an nou plin de fericire, sănătate și realizări!</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="greeting">
+            <h2>Felicitări de Anul Nou!</h2>
+            <p>Suntem aproape de un nou început. Haideți să sărbătorim împreună sosirea Anului Nou 2025!</p>
+        </section>
+
+        <section class="countdown">
+            <h3>Countdown până la Anul Nou 2025</h3>
+            <div id="timer"></div>
+        </section>
+
+        <section class="calendar">
+            <h3>Calendarul Anului 2025</h3>
+            <div id="calendar"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Kamelia.md. Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown pentru Anul Nou 2025
+        var countdownDate = new Date("Jan 1, 2025 00:00:00").getTime();
+        var timer = document.getElementById("timer");
+
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countdownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            timer.innerHTML = days + "z " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(x);
+                timer.innerHTML = "Anul Nou a sosit!";
+            }
+        }, 1000);
+
+        // Calendar 2025
+        const moment = require('moment');
+        var calendarDiv = document.getElementById('calendar');
+        const monthNames = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+        let calendarHtml = '<ul>';
+        for (let i = 0; i < 12; i++) {
+            const month = moment().month(i).format('MMMM YYYY');
+            calendarHtml += `<li>${month}</li>`;
+        }
+        calendarHtml += '</ul>';
+        calendarDiv.innerHTML = calendarHtml;
+    </script>
+</body>
+</html>
