@@ -6,7 +6,7 @@ export async function onRequestGet(context) {
        ORDER BY created_at DESC`
     )
     .all();
-
+ const website = document.getElementById("website").value;
   return Response.json(results);
 }
 
@@ -35,6 +35,14 @@ export async function onRequestPost(context) {
     { status: 400 }
   );
 }
+
+  if(body.website){
+   return new Response(
+      "Spam detectat",
+      {status:400}
+   );
+}
+  
   await context.env.DB
     .prepare(
       `INSERT INTO wishes
