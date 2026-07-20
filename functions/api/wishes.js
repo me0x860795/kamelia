@@ -23,7 +23,18 @@ export async function onRequestPost(context) {
       { status: 400 }
     );
   }
-
+  if (message.length > 500) {
+  return new Response(
+    "Mesaj prea lung",
+    { status: 400 }
+  );
+}
+  if (name.length > 50) {
+  return new Response(
+    "Nume prea lung",
+    { status: 400 }
+  );
+}
   await context.env.DB
     .prepare(
       `INSERT INTO wishes
