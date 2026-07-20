@@ -1,0 +1,39 @@
+export async function onRequestGet(context) {
+
+  const { results } = await context.env.DB
+    .prepare(
+      `SELECT * FROM wishes
+       ORDER BY created_at DESC`
+    )
+    .all();
+
+  return Response.json(results);
+}
+
+export async function onRequestPost(context) {
+
+  const body = await context.request.json();
+
+  const name = body.name || "Anonim";
+  const message = body.message;
+
+  if (!message) {
+    return new Response(
+      "Mesaj lipsă",
+      { status: 400 }
+    );
+  }
+
+  await context.env.DB
+    .prepare(
+      `INSERT INTO wishes
+      (name,message)
+      VALUES (?1,?2)`
+    )
+    .bind(name,message)
+    .run();
+
+  return Response.json({
+    success:true
+  });
+}
