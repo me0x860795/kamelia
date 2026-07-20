@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamelia — La mulți ani! 🎂</title>
+<style>
+  :root{
+    --pink: #ff8fc7;
+    --pink-dark: #ff5fa8;
+    --purple: #b388ff;
+    --yellow: #ffd54f;
+    --blue: #64b5f6;
+    --green: #81c784;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    overflow-x: hidden;
+    font-family: 'Comic Sans MS', 'Trebuchet MS', sans-serif;
+    background: linear-gradient(180deg, #fbe4f6 0%, #e8d9ff 50%, #d9f0ff 100%);
+    position: relative;
+  }
+
+  .cloud {
+    position: fixed;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    filter: blur(1px);
+    z-index: 0;
+  }
+
+  .confetti {
+    position: fixed;
+    top: -10px;
+    width: 10px;
+    height: 16px;
+    opacity: 0.9;
+    animation: fall linear infinite;
+    z-index: 1;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-10vh) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(720deg); }
+  }
+
+  .balloon {
+    position: fixed;
+    bottom: -150px;
+    width: 60px;
+    height: 78px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: float 12s linear infinite;
+    z-index: 1;
+    box-shadow: inset -8px -8px 12px rgba(0,0,0,0.08);
+  }
+  .balloon::after{
+    content:'';
+    position:absolute;
+    bottom:-40px;
+    left:50%;
+    width:1px;
+    height:40px;
+    background: rgba(0,0,0,0.25);
+  }
+  @keyframes float {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+    25%  { transform: translateY(-30vh) translateX(20px) rotate(3deg); }
+    50%  { transform: translateY(-60vh) translateX(-20px) rotate(-3deg); }
+    75%  { transform: translateY(-90vh) translateX(15px) rotate(3deg); }
+    100% { transform: translateY(-120vh) translateX(0) rotate(0deg); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 16px;
+    gap: 30px;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 40px;
+    padding: 45px 30px;
+    max-width: 680px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(179, 100, 200, 0.35);
+    border: 4px dashed var(--pink);
+  }
+
+  .crown { font-size: 55px; animation: bounce 2s ease-in-out infinite; }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+  }
+
+  h1 {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    color: var(--pink-dark);
+    text-shadow: 3px 3px 0 var(--yellow), 6px 6px 10px rgba(0,0,0,0.1);
+    margin: 10px 0 5px;
+  }
+  .name { color: var(--purple); }
+
+  h2 {
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    color: #7a5c8f;
+    margin-bottom: 20px;
+    font-weight: normal;
+  }
+
+  .age-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at 35% 30%, var(--yellow), #ffb300);
+    border-radius: 50%;
+    font-size: 3.2rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(255,179,0,0.5);
+    margin: 5px auto 20px;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  .message {
+    font-size: clamp(1rem, 3vw, 1.15rem);
+    color: #6b4f7a;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .date-tag {
+    display: inline-block;
+    background: var(--blue);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(100,181,246,0.5);
+  }
+
+  .timer-title{
+    font-size: 1.1rem;
+    color: var(--pink-dark);
+    margin-bottom: 14px;
+    font-weight: bold;
+  }
+  .timer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .timer-box {
+    background: linear-gradient(160deg, var(--purple), var(--pink-dark));
+    color: white;
+    border-radius: 18px;
+    padding: 14px 10px;
+    min-width: 72px;
+    box-shadow: 0 8px 18px rgba(179,100,200,0.4);
+  }
+  .timer-box .num {
+    font-size: clamp(1.6rem, 6vw, 2.3rem);
+    font-weight: bold;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer-box .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    margin-top: 4px;
+  }
+  .timer-done {
+    font-size: 1.4rem;
+    color: var(--pink-dark);
+    font-weight: bold;
+    display: none;
+  }
+
+  .cake { width: 170px; margin: 25px auto 10px; position: relative; }
+  .cake-layer { border-radius: 12px; margin-bottom: 6px; box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08); position: relative; }
+  .cake-layer.top { height: 38px; background: var(--pink-dark); }
+  .cake-layer.mid { height: 48px; background: var(--purple); width: 90%; margin-left: 5%; }
+  .cake-layer.base { height: 52px; background: var(--blue); width: 100%; }
+  .candle { position: absolute; top: -32px; left: 50%; transform: translateX(-50%); width: 6px; height: 28px; background: var(--yellow); border-radius: 3px; }
+  .flame {
+    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 16px;
+    background: radial-gradient(circle, #fff59d, #ff7043);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flicker 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes flicker {
+    0% { transform: translateX(-50%) scale(1) rotate(-3deg); }
+    100% { transform: translateX(-50%) scale(1.15) rotate(3deg); }
+  }
+
+  .emoji-row { font-size: 1.7rem; margin: 15px 0 5px; letter-spacing: 8px; }
+  .footer-note { margin-top: 16px; font-size: 0.85rem; color: #a68bb5; }
+
+  .gif-card{
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 30px;
+    padding: 25px;
+    max-width: 680px;
+    width: 100%;
+    box-shadow: 0 15px 40px rgba(179,100,200,0.25);
+    border: 3px dashed var(--purple);
+  }
+  .gif-card h3{
+    color: var(--purple);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+  .gif-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .gif-grid img{
+    width: 100%;
+    border-radius: 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    border: 3px solid white;
+    display: block;
+  }
+
+  @media (max-width: 480px){
+    .card, .gif-card{ padding: 30px 16px; }
+    .timer-box{ min-width: 62px; padding: 10px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <div class="crown">👑</div>
+    <h1>La mulți ani,<br><span class="name">Kamelia</span>!</h1>
+    <h2>Sărbătorim o prințesă specială 🌸</h2>
+
+    <div class="age-badge" id="ageBadge">3</div>
+
+    <p class="date-tag">🎈 Născută pe 22 iulie 2023, ora 07:23</p>
+
+    <div class="timer-title">⏳ Timp rămas până la ziua ei:</div>
+    <div class="timer" id="timer">
+      <div class="timer-box"><div class="num" id="days">00</div><div class="label">zile</div></div>
+      <div class="timer-box"><div class="num" id="hours">00</div><div class="label">ore</div></div>
+      <div class="timer-box"><div class="num" id="minutes">00</div><div class="label">min</div></div>
+      <div class="timer-box"><div class="num" id="seconds">00</div><div class="label">sec</div></div>
+    </div>
+    <div class="timer-done" id="timerDone">🎉 La mulți ani, Kamelia! 🎉</div>
+
+    <div class="cake">
+      <div class="cake-layer top"><div class="candle"><div class="flame"></div></div></div>
+      <div class="cake-layer mid"></div>
+      <div class="cake-layer base"></div>
+    </div>
+
+    <p class="message">
+      Trei ani plini de zâmbete, joacă și magie! 💫<br>
+      Îți dorim multă sănătate, bucurii nesfârșite și o copilărie
+      la fel de frumoasă și veselă cum ești tu. Să crești mare,
+      fericită și înconjurată de dragoste! 💗
+    </p>
+
+    <div class="emoji-row">🎀 🧁 🎠 🦄 🎁</div>
+    <p class="footer-note">Cu drag, familia ta ❤️</p>
+  </div>
+
+  <div class="gif-card">
+    <h3>🎊 Poze animate 🎊</h3>
+    <div class="gif-grid">
+      <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VyB31XTqZNJhFRZNyl/giphy.gif" alt="Tort aniversar animat">
+      <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/20cS04roeYZcVXAypm/giphy.gif" alt="Lumânări aniversare animate">
+      <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Y3THm9PonB55KXp9DI/giphy.gif" alt="Confetti animat">
+      <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CNNK7s0oINp0SyenZL/giphy.gif" alt="Felicitare la mulți ani animată">
+    </div>
+  </div>
+</div>
+
+<script>
+  const colors = ['#ff8fc7','#ffd54f','#b388ff','#64b5f6','#81c784','#ff5fa8'];
+  for (let i = 0; i < 55; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+    el.style.animationDuration = (4 + Math.random() * 5) + 's';
+    el.style.animationDelay = (Math.random() * 5) + 's';
+    document.body.appendChild(el);
+  }
+
+  for (let i = 0; i < 10; i++) {
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    b.style.left = (Math.random() * 90) + 'vw';
+    b.style.background = colors[Math.floor(Math.random() * colors.length)];
+    b.style.animationDuration = (10 + Math.random() * 8) + 's';
+    b.style.animationDelay = (Math.random() * 10) + 's';
+    document.body.appendChild(b);
+  }
+
+  for (let i = 0; i < 6; i++) {
+    const c = document.createElement('div');
+    c.className = 'cloud';
+    const size = 60 + Math.random() * 80;
+    c.style.width = size + 'px';
+    c.style.height = size * 0.6 + 'px';
+    c.style.top = (Math.random() * 80) + 'vh';
+    c.style.left = (Math.random() * 90) + 'vw';
+    document.body.appendChild(c);
+  }
+
+  const BIRTH_MONTH = 7;
+  const BIRTH_DAY = 22;
+  const BIRTH_HOUR = 7;
+  const BIRTH_MINUTE = 23;
+  const BIRTH_YEAR = 2023;
+
+  function getNextBirthday() {
+    const now = new Date();
+    let year = now.getFullYear();
+    let target = new Date(year, BIRTH_MONTH - 1, BIRTH_DAY, BIRTH_HOUR, BIRTH_MINUTE, 0);
+    if (target.getTime() <= now.getTime()) {
+      target = new Date(year + 1, BIRTH_MONTH - 1, BIRTH_DAY, BIRTH_HOUR, BIRTH_MINUTE, 0);
+    }
+    return target;
+  }
+
+  function updateAgeBadge(targetDate) {
+    const turningAge = targetDate.getFullYear() - BIRTH_YEAR;
+    document.getElementById('ageBadge').textContent = turningAge;
+  }
+
+  let nextBirthday = getNextBirthday();
+  updateAgeBadge(nextBirthday);
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now = new Date().getTime();
+    let diff = nextBirthday.getTime() - now;
+
+    if (diff <= 0) {
+      document.getElementById('timer').style.display = 'none';
+      document.getElementById('timerDone').style.display = 'block';
+      setTimeout(() => {
+        nextBirthday = getNextBirthday();
+        updateAgeBadge(nextBirthday);
+        document.getElementById('timer').style.display = 'flex';
+        document.getElementById('timerDone').style.display = 'none';
+      }, 5000);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('days').textContent = pad(days);
+    document.getElementById('hours').textContent = pad(hours);
+    document.getElementById('minutes').textContent = pad(minutes);
+    document.getElementById('seconds').textContent = pad(seconds);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
