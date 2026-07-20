@@ -435,6 +435,70 @@
   }
 
   tick();
+  async function saveWish(){
+
+    const name =
+        document.getElementById("name").value;
+
+    const message =
+        document.getElementById("message").value;
+
+    if(!message){
+        alert("Scrie un mesaj.");
+        return;
+    }
+
+    await fetch("/api/wishes",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            name,
+            message
+        })
+
+    });
+
+    document.getElementById("name").value="";
+    document.getElementById("message").value="";
+
+    loadWishes();
+}
+
+
+
+async function loadWishes(){
+
+    const response =
+        await fetch("/api/wishes");
+
+    const data =
+        await response.json();
+
+    const comments =
+        document.getElementById("comments");
+
+    comments.innerHTML="";
+
+    data.forEach(item=>{
+
+        comments.innerHTML += `
+        <div class="comment">
+            <strong>${item.name}</strong><br>
+            ${item.message}<br>
+            <small>${item.created_at}</small>
+        </div>
+        `;
+
+    });
+
+}
+
+loadWishes();
   setInterval(tick, 1000);
 </script>
 <div class="guestbook">
