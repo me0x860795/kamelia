@@ -36,6 +36,7 @@
     font-family: 'Fredoka', sans-serif;
   }
 
+  /* ---------- decorative background layers (non-interactive) ---------- */
   .cloud, .confetti, .balloon {
     position: fixed;
     pointer-events: none;
@@ -96,6 +97,7 @@
     100% { transform: translateY(-125vh) translateX(0)     rotate(-2deg); }
   }
 
+  /* ---------- layout ---------- */
   .container {
     position: relative;
     z-index: 2;
@@ -109,6 +111,7 @@
     gap: 26px;
   }
 
+  /* bunting */
   .bunting {
     display: flex;
     justify-content: center;
@@ -187,7 +190,7 @@
     margin-bottom: 18px;
   }
 
-  .age-wrap { position: relative; width: 108px; margin: 6px auto 18px; }
+  .age-wrap { position: relative; width: 108px; margin: 6px auto 4px; }
   .age-badge {
     display: flex;
     align-items: center;
@@ -208,6 +211,13 @@
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
     50%      { transform: scale(1.06); }
+  }
+
+  .age-caption{
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--pink-dark);
+    margin-bottom: 16px;
   }
 
   .message {
@@ -269,15 +279,37 @@
     margin-top: 4px;
     font-weight: 600;
   }
-  .timer-done {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.3rem;
-    color: var(--pink-dark);
-    font-weight: 600;
+
+  /* phase messages: birthday-day wishes & thank-you day, shown instead of the countdown */
+  .phase-message{
     display: none;
     margin-bottom: 26px;
+    padding: 22px 18px;
+    border-radius: 22px;
+    background: linear-gradient(160deg, rgba(255,209,102,0.25), rgba(255,143,199,0.2));
+    border: 2px dashed rgba(232, 85, 143, 0.35);
+  }
+  .phase-emoji{
+    font-size: 2.1rem;
+    margin-bottom: 8px;
+    letter-spacing: 8px;
+  }
+  .phase-title{
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--pink-dark);
+    margin-bottom: 8px;
+  }
+  .phase-text{
+    font-size: 1rem;
+    color: var(--plum-soft);
+    line-height: 1.7;
+    max-width: 40ch;
+    margin-inline: auto;
   }
 
+  /* cake */
   .cake { width: 160px; margin: 6px auto 22px; position: relative; cursor: pointer; }
   .cake-layer { border-radius: 10px; margin-bottom: 5px; box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08); position: relative; }
   .cake-layer.top  { height: 34px; background: var(--pink-dark); }
@@ -302,6 +334,7 @@
   .emoji-row { font-size: 1.6rem; margin: 4px 0 10px; letter-spacing: 10px; }
   .footer-note { margin-top: 14px; font-size: 0.85rem; color: var(--plum-soft); }
 
+  /* single animated gif */
   .gif-card{
     background: rgba(255, 250, 246, 0.9);
     backdrop-filter: blur(8px);
@@ -318,21 +351,60 @@
     margin-bottom: 14px;
     font-size: 1.15rem;
   }
-  .gif-grid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .gif-grid img{
+  .single-gif{
+    display: block;
     width: 100%;
+    max-width: 300px;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    border: 3px solid white;
-    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    border: 4px solid white;
   }
 
+  /* photo album */
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:14px;
+  }
+  .photo-grid img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:18px;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 6px 16px rgba(0,0,0,.15);
+  }
+  .photo-grid img:hover{
+    transform:scale(1.03);
+  }
+  .photo-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+  }
+  .photo-modal img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:20px;
+  }
+  #closePhoto{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:white;
+    font-size:48px;
+    cursor:pointer;
+  }
+
+  /* guestbook — lives in normal flow, own stacking context so it always sits above decor */
   .guestbook{
     position: relative;
     z-index: 2;
@@ -345,7 +417,6 @@
     box-shadow: 0 18px 44px rgba(179,100,200,0.22);
     text-align: left;
   }
-
   .guestbook h2{
     color: var(--pink-dark);
     text-align: center;
@@ -417,50 +488,6 @@
       animation: none !important;
     }
   }
-  .photo-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:14px;
-  }
-
-  .photo-grid img{
-    width:100%;
-    height:250px;
-    object-fit:cover;
-    border-radius:18px;
-    cursor:pointer;
-    transition:.3s;
-    box-shadow:0 6px 16px rgba(0,0,0,.15);
-  }
-
-  .photo-grid img:hover{
-    transform:scale(1.03);
-  }
-
-  .photo-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.9);
-    z-index:9999;
-    justify-content:center;
-    align-items:center;
-  }
-
-  .photo-modal img{
-    max-width:90%;
-    max-height:90%;
-    border-radius:20px;
-  }
-
-  #closePhoto{
-    position:absolute;
-    top:20px;
-    right:30px;
-    color:white;
-    font-size:48px;
-    cursor:pointer;
-  }
 </style>
 </head>
 <body>
@@ -479,17 +506,42 @@
     <div class="age-wrap">
       <div class="age-badge" id="ageBadge">3</div>
     </div>
+    <p class="age-caption" id="ageCaption">are 3 ani</p>
 
     <p class="date-tag">🎈 Născută pe 22 iulie 2023, ora 07:26</p>
 
-    <div class="timer-title">⏳ Timp rămas până la ziua ei:</div>
-    <div class="timer" id="timer">
-      <div class="timer-box"><div class="num" id="days">00</div><div class="label">zile</div></div>
-      <div class="timer-box"><div class="num" id="hours">00</div><div class="label">ore</div></div>
-      <div class="timer-box"><div class="num" id="minutes">00</div><div class="label">min</div></div>
-      <div class="timer-box"><div class="num" id="seconds">00</div><div class="label">sec</div></div>
+    <!-- 1) în fiecare zi, până la ziua ei: numărătoarea inversă -->
+    <div id="countdownSection">
+      <div class="timer-title">⏳ Timp rămas până la ziua ei:</div>
+      <div class="timer" id="timer">
+        <div class="timer-box"><div class="num" id="days">00</div><div class="label">zile</div></div>
+        <div class="timer-box"><div class="num" id="hours">00</div><div class="label">ore</div></div>
+        <div class="timer-box"><div class="num" id="minutes">00</div><div class="label">min</div></div>
+        <div class="timer-box"><div class="num" id="seconds">00</div><div class="label">sec</div></div>
+      </div>
     </div>
-    <div class="timer-done" id="timerDone">🎉 La mulți ani, Kamelia! 🎉</div>
+
+    <!-- 2) prima zi după aniversare: felicitare de la mama și tata -->
+    <div id="wishesSection" class="phase-message">
+      <div class="phase-emoji" aria-hidden="true">🎉🎂🎈</div>
+      <p class="phase-title">La mulți ani, Kamelia!</p>
+      <p class="phase-text">
+        Cu tot dragul din lume, mama și tata îți urează sănătate,
+        zâmbete și o zi plină de magie! Ești bucuria noastră cea
+        mai mare — te iubim nespus! 💗
+      </p>
+    </div>
+
+    <!-- 3) a doua zi după aniversare: mulțumire pentru toate felicitările -->
+    <div id="thanksSection" class="phase-message">
+      <div class="phase-emoji" aria-hidden="true">💌🎀</div>
+      <p class="phase-title">Mulțumim tuturor!</p>
+      <p class="phase-text">
+        Mama și tata mulțumesc din suflet tuturor celor care au
+        sărbătorit-o pe Kamelia și i-au trimis gânduri și urări
+        frumoase. Ați făcut ziua ei și mai specială! 💖
+      </p>
+    </div>
 
     <div class="cake" id="cake" title="Atinge lumânarea">
       <div class="cake-layer top"><div class="candle"><div class="flame" id="flame"></div></div></div>
@@ -510,19 +562,14 @@
   </div>
 
   <div class="gif-card">
-    <h3>🎊 Poze animate 🎊</h3>
-    <div class="gif-grid">
-      <img loading="lazy" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VyB31XTqZNJhFRZNyl/giphy.gif" alt="Tort aniversar animat">
-      <img loading="lazy" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/20cS04roeYZcVXAypm/giphy.gif" alt="Lumânări aniversare animate">
-      <img loading="lazy" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Y3THm9PonB55KXp9DI/giphy.gif" alt="Confetti animat">
-      <img loading="lazy" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CNNK7s0oINp0SyenZL/giphy.gif" alt="Felicitare la mulți ani animată">
-    </div>
+    <h3>🎊 Animație aniversară 🎊</h3>
+    <img class="single-gif" loading="lazy"
+      src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VyB31XTqZNJhFRZNyl/giphy.gif"
+      alt="Tort aniversar animat">
   </div>
 
   <div class="gif-card">
-
     <h3>📸 Albumul Kameliei 📸</h3>
-
     <div class="photo-grid">
       <img src="images/kamelia-01.jpg" alt="Kamelia">
       <img src="images/kamelia-02.jpg" alt="Kamelia">
@@ -531,6 +578,7 @@
       <img src="images/kamelia-05.jpg" alt="Kamelia">
     </div>
 
+    <!-- Fereastra pentru poza mărită -->
     <div id="photoModal" class="photo-modal">
       <span id="closePhoto">&times;</span>
       <img id="modalImage" alt="Poza mărită">
@@ -593,51 +641,85 @@
   }
   document.body.appendChild(fragment3);
 
-  // ---------- countdown ----------
-  const BIRTH_MONTH = 7, BIRTH_DAY = 22, BIRTH_HOUR = 7, BIRTH_MINUTE = 26, BIRTH_YEAR = 2023;
+  // ---------- birthday cycle: countdown -> wishes (24h) -> thanks (24h) -> countdown ... ----------
+  const BIRTH_YEAR = 2023, BIRTH_MONTH = 7, BIRTH_DAY = 22, BIRTH_HOUR = 7, BIRTH_MINUTE = 26;
+  const DAY_MS = 24 * 60 * 60 * 1000;
 
-  function getNextBirthday() {
-    const now = new Date();
+  function anniversary(year) {
+    return new Date(year, BIRTH_MONTH - 1, BIRTH_DAY, BIRTH_HOUR, BIRTH_MINUTE, 0);
+  }
+
+  // Decide which of the 3 phases we're in, relative to the closest anniversaries.
+  function getPhaseInfo(now) {
     const year = now.getFullYear();
-    let target = new Date(year, BIRTH_MONTH - 1, BIRTH_DAY, BIRTH_HOUR, BIRTH_MINUTE, 0);
-    if (target.getTime() <= now.getTime()) {
-      target = new Date(year + 1, BIRTH_MONTH - 1, BIRTH_DAY, BIRTH_HOUR, BIRTH_MINUTE, 0);
+    const candidates = [anniversary(year - 1), anniversary(year), anniversary(year + 1)];
+
+    for (const a of candidates) {
+      const diff = now.getTime() - a.getTime();
+      if (diff >= 0 && diff < DAY_MS) {
+        return { phase: 'wishes', anniversary: a };
+      }
+      if (diff >= DAY_MS && diff < 2 * DAY_MS) {
+        return { phase: 'thanks', anniversary: a };
+      }
     }
-    return target;
+
+    const upcoming = candidates.find(a => a.getTime() > now.getTime()) || anniversary(year + 2);
+    return { phase: 'countdown', anniversary: upcoming };
   }
 
-  function updateAgeBadge(targetDate) {
-    document.getElementById('ageBadge').textContent = targetDate.getFullYear() - BIRTH_YEAR;
+  // Age in full years + remaining months, e.g. "3 ani și o lună"
+  function calculateAge(now) {
+    const birth = new Date(BIRTH_YEAR, BIRTH_MONTH - 1, BIRTH_DAY);
+    let years = now.getFullYear() - birth.getFullYear();
+    let months = now.getMonth() - birth.getMonth();
+    let days = now.getDate() - birth.getDate();
+
+    if (days < 0) months -= 1;
+    if (months < 0) { years -= 1; months += 12; }
+    if (years < 0) years = 0;
+
+    return { years, months };
   }
 
-  let nextBirthday = getNextBirthday();
-  updateAgeBadge(nextBirthday);
+  function formatAge(years, months) {
+    const yearStr = years === 1 ? '1 an' : years + ' ani';
+    if (months <= 0) return 'are ' + yearStr;
+    const monthStr = months === 1 ? 'o lună' : months + ' luni';
+    return 'are ' + yearStr + ' și ' + monthStr;
+  }
 
   const pad = n => String(n).padStart(2, '0');
 
-  function tick() {
-    const diff = nextBirthday.getTime() - Date.now();
+  const ageBadge = document.getElementById('ageBadge');
+  const ageCaption = document.getElementById('ageCaption');
+  const countdownSection = document.getElementById('countdownSection');
+  const wishesSection = document.getElementById('wishesSection');
+  const thanksSection = document.getElementById('thanksSection');
 
-    if (diff <= 0) {
-      document.getElementById('timer').style.display = 'none';
-      document.getElementById('timerDone').style.display = 'block';
-      setTimeout(() => {
-        nextBirthday = getNextBirthday();
-        updateAgeBadge(nextBirthday);
-        document.getElementById('timer').style.display = 'flex';
-        document.getElementById('timerDone').style.display = 'none';
-      }, 5000);
-      return;
+  function renderPhase() {
+    const now = new Date();
+    const info = getPhaseInfo(now);
+    const age = calculateAge(now);
+
+    ageBadge.textContent = age.years;
+    ageCaption.textContent = formatAge(age.years, age.months);
+
+    countdownSection.style.display = info.phase === 'countdown' ? 'block' : 'none';
+    wishesSection.style.display   = info.phase === 'wishes'    ? 'block' : 'none';
+    thanksSection.style.display   = info.phase === 'thanks'    ? 'block' : 'none';
+
+    if (info.phase === 'countdown') {
+      const diff = info.anniversary.getTime() - now.getTime();
+      document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
+      document.getElementById('hours').textContent   = pad(Math.floor(diff / 3600000) % 24);
+      document.getElementById('minutes').textContent = pad(Math.floor(diff / 60000) % 60);
+      document.getElementById('seconds').textContent = pad(Math.floor(diff / 1000) % 60);
     }
-
-    document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
-    document.getElementById('hours').textContent   = pad(Math.floor(diff / 3600000) % 24);
-    document.getElementById('minutes').textContent = pad(Math.floor(diff / 60000) % 60);
-    document.getElementById('seconds').textContent = pad(Math.floor(diff / 1000) % 60);
   }
 
-  tick();
-  setInterval(tick, 1000);
+  renderPhase();
+  setInterval(renderPhase, 1000);
 
   // ---------- cake candle interaction ----------
   const cake = document.getElementById('cake');
@@ -648,25 +730,25 @@
     setTimeout(() => flame.classList.remove('out'), 2600);
   });
 
-  // ---------- photo gallery modal ----------
-  const modal = document.getElementById("photoModal");
-  const modalImage = document.getElementById("modalImage");
-  const closePhoto = document.getElementById("closePhoto");
+  // ---------- photo album modal ----------
+  const modal = document.getElementById('photoModal');
+  const modalImage = document.getElementById('modalImage');
+  const closePhoto = document.getElementById('closePhoto');
 
-  document.querySelectorAll(".photo-grid img").forEach(img => {
-    img.addEventListener("click", () => {
-      modal.style.display = "flex";
+  document.querySelectorAll('.photo-grid img').forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'flex';
       modalImage.src = img.src;
     });
   });
 
-  closePhoto.addEventListener("click", () => {
-    modal.style.display = "none";
+  closePhoto.addEventListener('click', () => {
+    modal.style.display = 'none';
   });
 
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal){
-      modal.style.display = "none";
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
     }
   });
 
