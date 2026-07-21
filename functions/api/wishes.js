@@ -6,7 +6,6 @@ export async function onRequestGet(context) {
        ORDER BY created_at DESC`
     )
     .all();
- const website = document.getElementById("website").value;
   return Response.json(results);
 }
 
