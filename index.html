@@ -4,14 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kamelia — La mulți ani! 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
+    --blush: #ffe1ee;
     --pink: #ff8fc7;
-    --pink-dark: #ff5fa8;
-    --purple: #b388ff;
-    --yellow: #ffd54f;
-    --blue: #64b5f6;
-    --green: #81c784;
+    --pink-dark: #e8558f;
+    --plum: #5b3a66;
+    --plum-soft: #7d5a8c;
+    --lavender: #c9a8f5;
+    --butter: #ffd166;
+    --sky: #9fdcf0;
+    --paper: #fffaf6;
+    --shadow-pink: rgba(216, 92, 150, 0.28);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,78 +26,78 @@
   html, body {
     min-height: 100%;
     overflow-x: hidden;
-    font-family: 'Comic Sans MS', 'Trebuchet MS', sans-serif;
-    background: linear-gradient(180deg, #fbe4f6 0%, #e8d9ff 50%, #d9f0ff 100%);
+    font-family: 'Quicksand', sans-serif;
+    color: var(--plum);
+    background: radial-gradient(ellipse at top, #fff6fb 0%, #f6e9ff 45%, #e3f2fb 100%);
     position: relative;
   }
 
-  .cloud {
+  h1, h2, h3, .display {
+    font-family: 'Fredoka', sans-serif;
+  }
+
+  /* ---------- decorative background layers (non-interactive) ---------- */
+  .cloud, .confetti, .balloon {
     position: fixed;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    filter: blur(1px);
-    z-index: 0;
     pointer-events: none;
   }
 
-.confetti {
-  position: fixed;
-  top: -10px;
-  opacity: 0.9;
-  animation: fall linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
+  .cloud {
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    filter: blur(1px);
+    z-index: 0;
+  }
 
-/* forme variate - le alternăm din JS cu o clasă extra */
-.confetti.square   { width: 9px;  height: 9px;  border-radius: 2px; }
-.confetti.round    { width: 9px;  height: 9px;  border-radius: 50%; }
-.confetti.strip    { width: 5px;  height: 16px;  border-radius: 2px; }
+  .confetti {
+    top: -10px;
+    opacity: 0.95;
+    animation: fall linear infinite;
+    z-index: 1;
+    will-change: transform, opacity;
+  }
+  .confetti.square { width: 9px;  height: 9px;  border-radius: 2px; }
+  .confetti.round  { width: 8px;  height: 8px;  border-radius: 50%; }
+  .confetti.strip  { width: 5px;  height: 16px; border-radius: 2px; }
 
-@keyframes fall {
-  0%   { transform: translate(0, -10vh) rotate(0deg); opacity: 0; }
-  8%   { opacity: 1; }
-  25%  { transform: translate(15px, 15vh) rotate(180deg); }
-  50%  { transform: translate(-20px, 45vh) rotate(360deg); }
-  75%  { transform: translate(10px, 75vh) rotate(540deg); }
-  92%  { opacity: 1; }
-  100% { transform: translate(0, 110vh) rotate(720deg); opacity: 0; }
-}
-  
   @keyframes fall {
-    0%   { transform: translateY(-10vh) rotate(0deg); }
-    100% { transform: translateY(110vh) rotate(720deg); }
+    0%   { transform: translate(0, -10vh) rotate(0deg);    opacity: 0; }
+    8%   { opacity: 1; }
+    25%  { transform: translate(18px, 20vh) rotate(180deg); }
+    50%  { transform: translate(-22px, 50vh) rotate(360deg); }
+    75%  { transform: translate(14px, 80vh) rotate(540deg); }
+    92%  { opacity: 1; }
+    100% { transform: translate(0, 110vh) rotate(720deg);  opacity: 0; }
   }
 
   .balloon {
-    position: fixed;
     bottom: -150px;
-    width: 60px;
-    height: 78px;
+    width: 56px;
+    height: 72px;
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    animation: float 12s linear infinite;
+    animation: float 13s linear infinite;
     z-index: 1;
-    box-shadow: inset -8px -8px 12px rgba(0,0,0,0.08);
-    pointer-events: none;
+    box-shadow: inset -8px -10px 14px rgba(0,0,0,0.08), inset 6px 6px 10px rgba(255,255,255,0.35);
   }
   .balloon::after{
     content:'';
     position:absolute;
-    bottom:-40px;
+    bottom:-38px;
     left:50%;
     width:1px;
-    height:40px;
-    background: rgba(0,0,0,0.25);
+    height:38px;
+    background: rgba(91,58,102,0.25);
   }
   @keyframes float {
-    0%   { transform: translateY(0) translateX(0) rotate(0deg); }
-    25%  { transform: translateY(-30vh) translateX(20px) rotate(3deg); }
-    50%  { transform: translateY(-60vh) translateX(-20px) rotate(-3deg); }
-    75%  { transform: translateY(-90vh) translateX(15px) rotate(3deg); }
-    100% { transform: translateY(-120vh) translateX(0) rotate(0deg); }
+    0%   { transform: translateY(0)      translateX(0)    rotate(-2deg); }
+    25%  { transform: translateY(-30vh)  translateX(22px) rotate(3deg); }
+    50%  { transform: translateY(-60vh)  translateX(-22px) rotate(-3deg); }
+    75%  { transform: translateY(-90vh)  translateX(16px)  rotate(3deg); }
+    100% { transform: translateY(-125vh) translateX(0)     rotate(-2deg); }
   }
 
+  /* ---------- layout ---------- */
   .container {
     position: relative;
     z-index: 2;
@@ -100,232 +107,340 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 40px 16px;
-    gap: 30px;
+    padding: 48px 16px 24px;
+    gap: 26px;
+  }
+
+  /* bunting */
+  .bunting {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: -6px;
+  }
+  .bunting span {
+    width: 0; height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 22px solid var(--pink);
+    border-radius: 0 0 4px 4px;
+    animation: sway 3.4s ease-in-out infinite;
+    transform-origin: top center;
+  }
+  .bunting span:nth-child(2n)   { border-top-color: var(--lavender); animation-delay: .2s; }
+  .bunting span:nth-child(3n)   { border-top-color: var(--butter);   animation-delay: .4s; }
+  .bunting span:nth-child(4n)   { border-top-color: var(--sky);      animation-delay: .6s; }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-4deg); }
+    50%      { transform: rotate(4deg); }
   }
 
   .card {
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(6px);
-    border-radius: 40px;
-    padding: 45px 30px;
-    max-width: 680px;
+    background: rgba(255, 250, 246, 0.9);
+    backdrop-filter: blur(8px);
+    border-radius: 34px;
+    padding: 42px 30px 36px;
+    max-width: 620px;
     width: 100%;
-    box-shadow: 0 20px 60px rgba(179, 100, 200, 0.35);
-    border: 4px dashed var(--pink);
+    box-shadow: 0 24px 60px var(--shadow-pink), inset 0 0 0 1px rgba(255,255,255,0.6);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before{
+    content:'';
+    position:absolute;
+    inset:10px;
+    border-radius: 26px;
+    border: 2.5px dashed rgba(232, 85, 143, 0.35);
+    pointer-events:none;
   }
 
-  .crown { font-size: 55px; animation: bounce 2s ease-in-out infinite; }
+  .crown { font-size: 46px; animation: bounce 2.2s ease-in-out infinite; display:inline-block; }
   @keyframes bounce {
-    0%, 100% { transform: translateY(0) rotate(-5deg); }
-    50% { transform: translateY(-15px) rotate(5deg); }
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50%      { transform: translateY(-12px) rotate(6deg); }
   }
 
   h1 {
-    font-size: clamp(2rem, 7vw, 3.5rem);
+    font-weight: 600;
+    font-size: clamp(2rem, 7vw, 3.1rem);
     color: var(--pink-dark);
-    text-shadow: 3px 3px 0 var(--yellow), 6px 6px 10px rgba(0,0,0,0.1);
-    margin: 10px 0 5px;
+    margin: 8px 0 2px;
+    line-height: 1.15;
   }
-  .name { color: var(--purple); }
+  .name { color: var(--plum); position: relative; }
+  .name::after{
+    content:'';
+    position:absolute;
+    left: 4%;
+    right: 4%;
+    bottom: 2px;
+    height: 10px;
+    background: var(--butter);
+    opacity: 0.5;
+    z-index: -1;
+    border-radius: 6px;
+  }
 
   h2 {
-    font-size: clamp(1.1rem, 4vw, 1.6rem);
-    color: #7a5c8f;
-    margin-bottom: 20px;
-    font-weight: normal;
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(1rem, 3.6vw, 1.25rem);
+    color: var(--plum-soft);
+    font-weight: 600;
+    margin-bottom: 18px;
   }
 
+  .age-wrap { position: relative; width: 108px; margin: 6px auto 18px; }
   .age-badge {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle at 35% 30%, var(--yellow), #ffb300);
+    width: 108px;
+    height: 108px;
+    background: radial-gradient(circle at 35% 30%, #ffe08a, var(--butter) 60%, #f5a623 100%);
     border-radius: 50%;
-    font-size: 3.2rem;
-    font-weight: bold;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 3.1rem;
+    font-weight: 600;
     color: #fff;
-    text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
-    box-shadow: 0 8px 20px rgba(255,179,0,0.5);
-    margin: 5px auto 20px;
-    animation: pulse 1.8s ease-in-out infinite;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 10px 22px rgba(245, 166, 35, 0.45);
+    animation: pulse 2s ease-in-out infinite;
+    border: 5px solid var(--paper);
   }
   @keyframes pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); }
+    50%      { transform: scale(1.06); }
   }
 
   .message {
-    font-size: clamp(1rem, 3vw, 1.15rem);
-    color: #6b4f7a;
-    line-height: 1.7;
-    margin-bottom: 20px;
+    font-size: clamp(1rem, 3vw, 1.12rem);
+    color: var(--plum-soft);
+    line-height: 1.75;
+    margin-bottom: 18px;
+    max-width: 46ch;
+    margin-inline: auto;
   }
 
   .date-tag {
-    display: inline-block;
-    background: var(--blue);
-    color: white;
-    padding: 8px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, var(--sky), #7cc9e8);
+    color: #10516a;
+    font-weight: 600;
+    padding: 8px 18px;
     border-radius: 30px;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(100,181,246,0.5);
+    font-size: 0.88rem;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 14px rgba(124, 201, 232, 0.5);
   }
 
   .timer-title{
-    font-size: 1.1rem;
+    font-weight: 600;
+    font-size: 1.02rem;
     color: var(--pink-dark);
-    margin-bottom: 14px;
-    font-weight: bold;
+    margin-bottom: 12px;
   }
   .timer {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 10px;
+    margin-bottom: 26px;
   }
   .timer-box {
-    background: linear-gradient(160deg, var(--purple), var(--pink-dark));
+    background: linear-gradient(160deg, var(--lavender), var(--pink-dark));
     color: white;
-    border-radius: 18px;
-    padding: 14px 10px;
-    min-width: 72px;
-    box-shadow: 0 8px 18px rgba(179,100,200,0.4);
+    border-radius: 16px;
+    padding: 12px 8px;
+    min-width: 66px;
+    box-shadow: 0 8px 16px rgba(179, 100, 200, 0.4);
   }
   .timer-box .num {
-    font-size: clamp(1.6rem, 6vw, 2.3rem);
-    font-weight: bold;
+    font-family: 'Fredoka', sans-serif;
+    font-size: clamp(1.4rem, 5.6vw, 2rem);
+    font-weight: 600;
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
   .timer-box .label {
-    font-size: 0.7rem;
+    font-size: 0.64rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     opacity: 0.9;
     margin-top: 4px;
+    font-weight: 600;
   }
   .timer-done {
-    font-size: 1.4rem;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.3rem;
     color: var(--pink-dark);
-    font-weight: bold;
+    font-weight: 600;
     display: none;
+    margin-bottom: 26px;
   }
 
-  .cake { width: 170px; margin: 25px auto 10px; position: relative; }
-  .cake-layer { border-radius: 12px; margin-bottom: 6px; box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08); position: relative; }
-  .cake-layer.top { height: 38px; background: var(--pink-dark); }
-  .cake-layer.mid { height: 48px; background: var(--purple); width: 90%; margin-left: 5%; }
-  .cake-layer.base { height: 52px; background: var(--blue); width: 100%; }
-  .candle { position: absolute; top: -32px; left: 50%; transform: translateX(-50%); width: 6px; height: 28px; background: var(--yellow); border-radius: 3px; }
+  /* cake */
+  .cake { width: 160px; margin: 6px auto 22px; position: relative; cursor: pointer; }
+  .cake-layer { border-radius: 10px; margin-bottom: 5px; box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08); position: relative; }
+  .cake-layer.top  { height: 34px; background: var(--pink-dark); }
+  .cake-layer.mid  { height: 44px; background: var(--lavender); width: 90%; margin-left: 5%; }
+  .cake-layer.base { height: 48px; background: var(--sky); width: 100%; }
+  .candle { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 6px; height: 26px; background: var(--butter); border-radius: 3px; }
   .flame {
-    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-    width: 10px; height: 16px;
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    width: 9px; height: 15px;
     background: radial-gradient(circle, #fff59d, #ff7043);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     animation: flicker 0.6s ease-in-out infinite alternate;
+    transition: opacity .3s ease, transform .3s ease;
   }
+  .flame.out { opacity: 0; transform: translateX(-50%) scale(0.3); }
   @keyframes flicker {
-    0% { transform: translateX(-50%) scale(1) rotate(-3deg); }
+    0%   { transform: translateX(-50%) scale(1)    rotate(-3deg); }
     100% { transform: translateX(-50%) scale(1.15) rotate(3deg); }
   }
+  .cake-hint { font-size: 0.78rem; color: var(--plum-soft); opacity: 0.75; margin-top: -12px; margin-bottom: 20px; }
 
-  .emoji-row { font-size: 1.7rem; margin: 15px 0 5px; letter-spacing: 8px; }
-  .footer-note { margin-top: 16px; font-size: 0.85rem; color: #a68bb5; }
+  .emoji-row { font-size: 1.6rem; margin: 4px 0 10px; letter-spacing: 10px; }
+  .footer-note { margin-top: 14px; font-size: 0.85rem; color: var(--plum-soft); }
 
+  /* gif gallery */
   .gif-card{
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(6px);
-    border-radius: 30px;
-    padding: 25px;
-    max-width: 680px;
+    background: rgba(255, 250, 246, 0.9);
+    backdrop-filter: blur(8px);
+    border-radius: 28px;
+    padding: 26px;
+    max-width: 620px;
     width: 100%;
-    box-shadow: 0 15px 40px rgba(179,100,200,0.25);
-    border: 3px dashed var(--purple);
+    box-shadow: 0 18px 44px rgba(179,100,200,0.22);
+    border: 2.5px dashed rgba(179, 136, 255, 0.4);
   }
   .gif-card h3{
-    color: var(--purple);
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--lavender);
+    color: #9a6fe0;
+    margin-bottom: 14px;
+    font-size: 1.15rem;
   }
   .gif-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    gap: 12px;
   }
   .gif-grid img{
     width: 100%;
-    border-radius: 18px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 16px;
     box-shadow: 0 6px 16px rgba(0,0,0,0.15);
     border: 3px solid white;
     display: block;
   }
 
-  @media (max-width: 480px){
-    .card, .gif-card{ padding: 30px 16px; }
-    .timer-box{ min-width: 62px; padding: 10px 6px; }
+  /* guestbook — lives in normal flow, own stacking context so it always sits above decor */
+  .guestbook{
+    position: relative;
+    z-index: 2;
+    width:100%;
+    max-width:620px;
+    padding: 30px;
+    background: rgba(255, 250, 246, 0.9);
+    backdrop-filter: blur(8px);
+    border-radius:28px;
+    box-shadow: 0 18px 44px rgba(179,100,200,0.22);
+    text-align: left;
   }
-.guestbook{
+  .guestbook h2{
+    color: var(--pink-dark);
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+  }
+  .guestbook input,
+  .guestbook textarea{
     width:100%;
-    max-width:700px;
-    margin:30px auto;
-    padding:25px;
-    background:white;
-    border-radius:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-    position:relative;
-    z-index:3;
-}
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    padding: 12px 14px;
+    margin: 8px 0;
+    border-radius: 14px;
+    border: 1.5px solid #f0d9e6;
+    background: #fffdfb;
+    color: var(--plum);
+  }
+  .guestbook input:focus,
+  .guestbook textarea:focus{
+    outline: none;
+    border-color: var(--pink);
+    box-shadow: 0 0 0 3px rgba(255,143,199,0.25);
+  }
+  .guestbook textarea{ min-height: 100px; resize: vertical; }
+  .guestbook .honeypot{ display:none; }
 
-.guestbook h2{
-    color:#ff5fa8;
-    margin-bottom:15px;
-}
-
-.guestbook input,
-.guestbook textarea{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border-radius:12px;
-    border:1px solid #ddd;
-}
-
-.guestbook textarea{
-    min-height:120px;
-}
-
-.guestbook button{
-    background:#ff5fa8;
-    color:white;
+  .guestbook button{
+    display:block;
+    margin: 6px auto 0;
+    background: linear-gradient(135deg, var(--pink-dark), var(--pink));
+    color: white;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
     border:none;
-    padding:12px 25px;
-    border-radius:20px;
+    padding: 12px 28px;
+    border-radius: 22px;
     cursor:pointer;
-}
+    box-shadow: 0 8px 18px rgba(232,85,143,0.4);
+    transition: transform .15s ease;
+  }
+  .guestbook button:hover{ transform: translateY(-2px); }
+  .guestbook button:disabled{ opacity: 0.6; cursor: default; transform:none; }
 
-.comment{
+  .comment{
     margin-top:12px;
-    padding:15px;
-    border-radius:12px;
+    padding:14px 16px;
+    border-radius:14px;
     background:#fff4fa;
-    text-align:left;
-} 
+    border: 1px solid #ffe1ee;
+  }
+  .comment strong{ color: var(--pink-dark); }
+  .comment small{ color: var(--plum-soft); opacity: 0.75; }
+  .comments-empty, .comments-error{
+    text-align:center;
+    color: var(--plum-soft);
+    font-size: 0.9rem;
+    padding: 10px 0;
+  }
+
+  @media (max-width: 480px){
+    .card, .gif-card, .guestbook{ padding: 28px 18px; }
+    .timer-box{ min-width: 58px; padding: 10px 6px; }
+    .bunting span{ border-left-width:11px; border-right-width:11px; border-top-width:16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .confetti, .balloon, .crown, .age-badge, .bunting span, .flame{
+      animation: none !important;
+    }
+  }
 </style>
 </head>
 <body>
 
 <div class="container">
+
+  <div class="bunting" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
   <div class="card">
-    <div class="crown">👑</div>
+    <div class="crown" aria-hidden="true">👑</div>
     <h1>La mulți ani,<br><span class="name">Kamelia</span>!</h1>
     <h2>Sărbătorim o prințesă specială 🌸</h2>
 
-    <div class="age-badge" id="ageBadge">3</div>
+    <div class="age-wrap">
+      <div class="age-badge" id="ageBadge">3</div>
+    </div>
 
     <p class="date-tag">🎈 Născută pe 22 iulie 2023, ora 07:26</p>
 
@@ -338,11 +453,12 @@
     </div>
     <div class="timer-done" id="timerDone">🎉 La mulți ani, Kamelia! 🎉</div>
 
-    <div class="cake">
-      <div class="cake-layer top"><div class="candle"><div class="flame"></div></div></div>
+    <div class="cake" id="cake" title="Atinge lumânarea">
+      <div class="cake-layer top"><div class="candle"><div class="flame" id="flame"></div></div></div>
       <div class="cake-layer mid"></div>
       <div class="cake-layer base"></div>
     </div>
+    <p class="cake-hint">🕯️ atinge lumânarea</p>
 
     <p class="message">
       Trei ani plini de zâmbete, joacă și magie! 💫<br>
@@ -351,44 +467,64 @@
       fericită și înconjurată de dragoste! 💗
     </p>
 
-    <div class="emoji-row">🎀 🧁 🎠 🦄 🎁</div>
+    <div class="emoji-row" aria-hidden="true">🎀 🧁 🎠 🦄 🎁</div>
     <p class="footer-note">Cu drag, familia ta ❤️</p>
   </div>
 
   <div class="gif-card">
     <h3>🎊 Poze animate 🎊</h3>
     <div class="gif-grid">
-      <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VyB31XTqZNJhFRZNyl/giphy.gif" alt="Tort aniversar animat">
-      <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/20cS04roeYZcVXAypm/giphy.gif" alt="Lumânări aniversare animate">
-      <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Y3THm9PonB55KXp9DI/giphy.gif" alt="Confetti animat">
-      <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CNNK7s0oINp0SyenZL/giphy.gif" alt="Felicitare la mulți ani animată">
+      <img loading="lazy" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VyB31XTqZNJhFRZNyl/giphy.gif" alt="Tort aniversar animat">
+      <img loading="lazy" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/20cS04roeYZcVXAypm/giphy.gif" alt="Lumânări aniversare animate">
+      <img loading="lazy" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Y3THm9PonB55KXp9DI/giphy.gif" alt="Confetti animat">
+      <img loading="lazy" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmp3NG00NWlmNWFiaDA5OTBqZmwwYWIzMTZ6OHd4cGtkcjNxaWxqeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CNNK7s0oINp0SyenZL/giphy.gif" alt="Felicitare la mulți ani animată">
     </div>
   </div>
+
+  <div class="guestbook">
+    <h2>💌 Lasă o felicitare pentru Kamelia</h2>
+
+    <input id="name" type="text" placeholder="Numele tău" maxlength="50">
+    <input type="text" id="website" class="honeypot" tabindex="-1" autocomplete="off">
+    <textarea id="message" placeholder="Scrie felicitarea aici..." maxlength="500"></textarea>
+
+    <button id="sendBtn" onclick="saveWish()">Trimite felicitarea</button>
+
+    <div id="comments"></div>
+  </div>
+
 </div>
 
 <script>
-  const colors = ['#ff8fc7','#ffd54f','#b388ff','#64b5f6','#81c784','#ff5fa8'];
+  // ---------- decorative layers ----------
+  const colors = ['#ff8fc7', '#ffd166', '#c9a8f5', '#9fdcf0', '#7fd8a3', '#e8558f'];
+  const shapes = ['square', 'round', 'strip'];
+
+  const fragment1 = document.createDocumentFragment();
   for (let i = 0; i < 55; i++) {
     const el = document.createElement('div');
-    el.className = 'confetti';
+    el.className = 'confetti ' + shapes[Math.floor(Math.random() * shapes.length)];
     el.style.left = Math.random() * 100 + 'vw';
     el.style.background = colors[Math.floor(Math.random() * colors.length)];
-    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
     el.style.animationDuration = (4 + Math.random() * 5) + 's';
     el.style.animationDelay = (Math.random() * 5) + 's';
-    document.body.appendChild(el);
+    fragment1.appendChild(el);
   }
+  document.body.appendChild(fragment1);
 
-  for (let i = 0; i < 10; i++) {
+  const fragment2 = document.createDocumentFragment();
+  for (let i = 0; i < 8; i++) {
     const b = document.createElement('div');
     b.className = 'balloon';
     b.style.left = (Math.random() * 90) + 'vw';
     b.style.background = colors[Math.floor(Math.random() * colors.length)];
-    b.style.animationDuration = (10 + Math.random() * 8) + 's';
+    b.style.animationDuration = (11 + Math.random() * 8) + 's';
     b.style.animationDelay = (Math.random() * 10) + 's';
-    document.body.appendChild(b);
+    fragment2.appendChild(b);
   }
+  document.body.appendChild(fragment2);
 
+  const fragment3 = document.createDocumentFragment();
   for (let i = 0; i < 6; i++) {
     const c = document.createElement('div');
     c.className = 'cloud';
@@ -397,18 +533,16 @@
     c.style.height = size * 0.6 + 'px';
     c.style.top = (Math.random() * 80) + 'vh';
     c.style.left = (Math.random() * 90) + 'vw';
-    document.body.appendChild(c);
+    fragment3.appendChild(c);
   }
+  document.body.appendChild(fragment3);
 
-  const BIRTH_MONTH = 7;
-  const BIRTH_DAY = 22;
-  const BIRTH_HOUR = 7;
-  const BIRTH_MINUTE = 26;
-  const BIRTH_YEAR = 2023;
+  // ---------- countdown ----------
+  const BIRTH_MONTH = 7, BIRTH_DAY = 22, BIRTH_HOUR = 7, BIRTH_MINUTE = 26, BIRTH_YEAR = 2023;
 
   function getNextBirthday() {
     const now = new Date();
-    let year = now.getFullYear();
+    const year = now.getFullYear();
     let target = new Date(year, BIRTH_MONTH - 1, BIRTH_DAY, BIRTH_HOUR, BIRTH_MINUTE, 0);
     if (target.getTime() <= now.getTime()) {
       target = new Date(year + 1, BIRTH_MONTH - 1, BIRTH_DAY, BIRTH_HOUR, BIRTH_MINUTE, 0);
@@ -417,18 +551,16 @@
   }
 
   function updateAgeBadge(targetDate) {
-    const turningAge = targetDate.getFullYear() - BIRTH_YEAR;
-    document.getElementById('ageBadge').textContent = turningAge;
+    document.getElementById('ageBadge').textContent = targetDate.getFullYear() - BIRTH_YEAR;
   }
 
   let nextBirthday = getNextBirthday();
   updateAgeBadge(nextBirthday);
 
-  function pad(n) { return String(n).padStart(2, '0'); }
+  const pad = n => String(n).padStart(2, '0');
 
   function tick() {
-    const now = new Date().getTime();
-    let diff = nextBirthday.getTime() - now;
+    const diff = nextBirthday.getTime() - Date.now();
 
     if (diff <= 0) {
       document.getElementById('timer').style.display = 'none';
@@ -442,112 +574,102 @@
       return;
     }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    document.getElementById('days').textContent = pad(days);
-    document.getElementById('hours').textContent = pad(hours);
-    document.getElementById('minutes').textContent = pad(minutes);
-    document.getElementById('seconds').textContent = pad(seconds);
+    document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
+    document.getElementById('hours').textContent   = pad(Math.floor(diff / 3600000) % 24);
+    document.getElementById('minutes').textContent = pad(Math.floor(diff / 60000) % 60);
+    document.getElementById('seconds').textContent = pad(Math.floor(diff / 1000) % 60);
   }
 
   tick();
-  async function saveWish(){
-
-    const name =
-        document.getElementById("name").value;
-
-    const message =
-        document.getElementById("message").value;
-
-    if(!message){
-        alert("Scrie un mesaj.");
-        return;
-    }
-
-    await fetch("/api/wishes",{
-
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-            name,
-            message
-        })
-
-    });
-
-    document.getElementById("name").value="";
-    document.getElementById("message").value="";
-
-    loadWishes();
-}
-
-
-
-async function loadWishes(){
-
-    const response =
-        await fetch("/api/wishes");
-
-    const data =
-        await response.json();
-
-    const comments =
-        document.getElementById("comments");
-
-    comments.innerHTML="";
-
-    data.forEach(item=>{
-
-        comments.innerHTML += `
-        <div class="comment">
-            <strong>${item.name}</strong><br>
-            ${item.message}<br>
-            <small>${item.created_at}</small>
-        </div>
-        `;
-
-    });
-
-}
-
-loadWishes();
   setInterval(tick, 1000);
 
+  // ---------- cake candle interaction ----------
+  const cake = document.getElementById('cake');
+  const flame = document.getElementById('flame');
+  cake.addEventListener('click', () => {
+    if (flame.classList.contains('out')) return;
+    flame.classList.add('out');
+    setTimeout(() => flame.classList.remove('out'), 2600);
+  });
+
+  // ---------- guestbook ----------
+  function escapeHtml(str){
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function formatDate(value){
+    const d = new Date(value);
+    if (isNaN(d.getTime())) return escapeHtml(value || '');
+    return d.toLocaleString('ro-RO', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+
+  async function saveWish(){
+    const nameEl = document.getElementById('name');
+    const messageEl = document.getElementById('message');
+    const websiteEl = document.getElementById('website');
+    const btn = document.getElementById('sendBtn');
+
+    const name = nameEl.value.trim();
+    const message = messageEl.value.trim();
+
+    if (!message){
+      alert('Scrie un mesaj.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Se trimite...';
+
+    try {
+      const res = await fetch('/api/wishes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, message, website: websiteEl.value })
+      });
+      if (!res.ok) throw new Error('request failed');
+
+      nameEl.value = '';
+      messageEl.value = '';
+      await loadWishes();
+    } catch (err) {
+      alert('Nu am putut trimite felicitarea. Încearcă din nou.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Trimite felicitarea';
+    }
+  }
+
+  async function loadWishes(){
+    const comments = document.getElementById('comments');
+    try {
+      const res = await fetch('/api/wishes');
+      if (!res.ok) throw new Error('request failed');
+      const data = await res.json();
+
+      if (!data.length){
+        comments.innerHTML = '<p class="comments-empty">Fii primul care lasă o felicitare 💕</p>';
+        return;
+      }
+
+      comments.innerHTML = data.map(item => `
+        <div class="comment">
+          <strong>${escapeHtml(item.name || 'Anonim')}</strong><br>
+          ${escapeHtml(item.message)}<br>
+          <small>${formatDate(item.created_at)}</small>
+        </div>
+      `).join('');
+    } catch (err) {
+      comments.innerHTML = '<p class="comments-error">Felicitările nu au putut fi încărcate.</p>';
+    }
+  }
+
+  loadWishes();
 </script>
 
-    <div class="guestbook">
-
-    <h2>💌 Lasă o felicitare pentru Kamelia</h2>
-
-    <input
-        id="name"
-        type="text"
-        placeholder="Numele tău"
-    >
-    <input
-  type="text"
-  id="website"
-  style="display:none"
-  />
-    <textarea
-        id="message"
-        placeholder="Scrie felicitarea aici..."
-    ></textarea>
-
-    <button onclick="saveWish()">
-        Trimite felicitarea
-    </button>
-
-    <div id="comments"></div>
-
-</div>
-  
 </body>
 </html>
