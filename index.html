@@ -353,96 +353,6 @@
     text-align: left;
   }
 
-<div class="gif-card">
-
-    <h3>📸 Albumul Kameliei 📸</h3>
-
-    <div class="photo-grid">
-
-        images/kamelia-01.jpg
-        images/kamelia-02.jpg alt="Kamelia">
-        -03.jpg" alt="Kamelia">
-        images/kamelia-04.jpg" alt="Kamelia">
-        <img src="images/kamelia-05.jpg" alt/div>
-
-<div id="photoModal" class="photo-modal">
-    <span id="closePhoto">&times;</span>
-    <img id="modalImage"
-
-  .photo-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:14px;
-}
-
-.photo-grid img{
-    width:100%;
-    height:250px;
-    object-fit:cover;
-    border-radius:18px;
-    cursor:pointer;
-    transition:transform .3s ease;
-    box-shadow:0 6px 16px rgba(0,0,0,.15);
-}
-
-.photo-grid img:hover{
-    transform:scale(1.03);
-}
-
-.photo-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.9);
-    z-index:9999;
-    justify-content:center;
-    align-items:center;
-}
-
-.photo-modal img{
-    max-width:90%;
-    max-height:90%;
-    border-radius:20px;
-}
-
-#closePhoto{
-    position:absolute;
-    top:20px;
-    right:30px;
-    color:white;
-    font-size:48px;
-    cursor:pointer;
-}
-
-  const modal = document.getElementById("photoModal");
-const modalImage = document.getElementById("modalImage");
-const closePhoto = document.getElementById("closePhoto");
-
-document.querySelectorAll(".photo-grid img").forEach(img => {
-
-    img.addEventListener("click", () => {
-
-        modal.style.display = "flex";
-        modalImage.src = img.src;
-
-    });
-
-});
-
-closePhoto.addEventListener("click", () => {
-
-    modal.style.display = "none";
-
-});
-
-modal.addEventListener("click", (e) => {
-
-    if(e.target === modal){
-        modal.style.display = "none";
-    }
-
-});
-
   
   .guestbook h2{
     color: var(--pink-dark);
@@ -515,6 +425,51 @@ modal.addEventListener("click", (e) => {
       animation: none !important;
     }
   }
+.photo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:14px;
+}
+
+.photo-grid img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:18px;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 6px 16px rgba(0,0,0,.15);
+}
+
+.photo-grid img:hover{
+    transform:scale(1.03);
+}
+
+.photo-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+
+.photo-modal img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:20px;
+}
+
+#closePhoto{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:white;
+    font-size:48px;
+    cursor:pointer;
+}
+  
 </style>
 </head>
 <body>
@@ -573,6 +528,19 @@ modal.addEventListener("click", (e) => {
     </div>
   </div>
 
+  <div class="gif-card">
+
+  <h3>📸 Albumul Kameliei 📸</h3>
+
+  <div class="photo-grid">
+    <img src="images/kamelia-01.jpg" alt="amelia">
+    amelia-03.jpg" alt="Kamelia">
+    <img src="images/kamelia-04.jpg" altimages/kamelia-05.jpg" altv>
+
+<div id="photoModal" class="photo-modal">
+  <span id="closePhoto">&times;</span>
+  <img id="modalImage" alt="Poza mărită">
+</div>
   <div class="guestbook">
     <h2>💌 Lasă o felicitare pentru Kamelia</h2>
 
@@ -788,6 +756,30 @@ modal.addEventListener("click", (e) => {
   }
 
   loadWishes();
+  const modal = document.getElementById("photoModal");
+const modalImage = document.getElementById("modalImage");
+const closePhoto = document.getElementById("closePhoto");
+
+document.querySelectorAll(".photo-grid img").forEach(img => {
+
+    img.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modalImage.src = img.src;
+    });
+
+});
+
+closePhoto.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+modal.addEventListener("click", (e) => {
+
+    if(e.target === modal){
+        modal.style.display = "none";
+    }
+
+});
 </script>
 
 </body>
