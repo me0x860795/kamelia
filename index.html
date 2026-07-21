@@ -31,17 +31,33 @@
     opacity: 0.8;
     filter: blur(1px);
     z-index: 0;
+    pointer-events: none;
   }
 
-  .confetti {
-    position: fixed;
-    top: -10px;
-    width: 10px;
-    height: 16px;
-    opacity: 0.9;
-    animation: fall linear infinite;
-    z-index: 1;
-  }
+.confetti {
+  position: fixed;
+  top: -10px;
+  opacity: 0.9;
+  animation: fall linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* forme variate - le alternăm din JS cu o clasă extra */
+.confetti.square   { width: 9px;  height: 9px;  border-radius: 2px; }
+.confetti.round    { width: 9px;  height: 9px;  border-radius: 50%; }
+.confetti.strip    { width: 5px;  height: 16px;  border-radius: 2px; }
+
+@keyframes fall {
+  0%   { transform: translate(0, -10vh) rotate(0deg); opacity: 0; }
+  8%   { opacity: 1; }
+  25%  { transform: translate(15px, 15vh) rotate(180deg); }
+  50%  { transform: translate(-20px, 45vh) rotate(360deg); }
+  75%  { transform: translate(10px, 75vh) rotate(540deg); }
+  92%  { opacity: 1; }
+  100% { transform: translate(0, 110vh) rotate(720deg); opacity: 0; }
+}
+  
   @keyframes fall {
     0%   { transform: translateY(-10vh) rotate(0deg); }
     100% { transform: translateY(110vh) rotate(720deg); }
@@ -56,6 +72,7 @@
     animation: float 12s linear infinite;
     z-index: 1;
     box-shadow: inset -8px -8px 12px rgba(0,0,0,0.08);
+    pointer-events: none;
   }
   .balloon::after{
     content:'';
@@ -260,6 +277,8 @@
     background:white;
     border-radius:25px;
     box-shadow:0 10px 30px rgba(0,0,0,.15);
+    position:relative;
+    z-index:3;
 }
 
 .guestbook h2{
@@ -500,7 +519,18 @@ async function loadWishes(){
 
 loadWishes();
   setInterval(tick, 1000);
-
+// în <script> din index.html, unde era bucla veche:
+const shapes = ['square', 'round', 'strip'];
+const colors = ['#ff8fc7','#ffd54f','#b388ff','#64b5f6','#81c784','#ff5fa8'];
+for (let i = 0; i < 55; i++) {
+  const el = document.createElement('div');
+  el.className = 'confetti ' + shapes[Math.floor(Math.random() * shapes.length)];
+  el.style.left = Math.random() * 100 + 'vw';
+  el.style.background = colors[Math.floor(Math.random() * colors.length)];
+  el.style.animationDuration = (4 + Math.random() * 5) + 's';
+  el.style.animationDelay = (Math.random() * 5) + 's';
+  document.body.appendChild(el);
+}
 
 </script>
 
